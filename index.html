@@ -167,56 +167,7 @@
             text.innerText = "⌛ HOLD / WAIT";
             box.style.borderColor = "var(--cyan)";
             text.style.color = "#fff";
-        }import time
-import requests
-from web3 import Web3 # For Ethereum/Solana interaction
-from textblob import TextBlob # For Sentiment Analysis
-
-class SolEngineCore:
-    def __init__(self):
-        # Nodes Connection
-        self.eth_node = "https://eth-mainnet.g.alchemy.com/v2/YOUR_KEY"
-        self.w3 = Web3(Web3.HTTPProvider(self.eth_node))
-        self.weights = {'on_chain': 0.4, 'social': 0.3, 'macro': 0.3}
-
-    def read_mempool(self):
-        """Bitcoin/ETH Mempool read karke bade pending transactions dekhna"""
-        # Logic: Agar mempool me bade sell orders pending hain, to market girega
-        print("Reading Blockchain Mempool...")
-        return 0.8 # Bullish factor
-
-    def social_intelligence(self):
-        """Telegram aur Twitter rumors scan karna"""
-        # Real-time NLP: Analyzing keywords like 'ETF', 'Hack', 'Dump'
-        sample_tweets = ["Bitcoin is going to the moon!", "Major exchange hack rumored"]
-        sentiment = 0
-        for tweet in sample_tweets:
-            analysis = TextBlob(tweet)
-            sentiment += analysis.sentiment.polarity
-        return sentiment
-
-    def get_macro_data(self):
-        """DXY, S&P 500 aur Interest Rates fetch karna"""
-        # DXY up = Crypto Down (Inverse correlation)
-        dxy = 101.5 
-        return 1 if dxy < 100 else 0.5
-
-    def generate_alpha_signal(self):
-        """Sabhi data ko calculate karke final signal dena"""
-        oc = self.read_mempool() * self.weights['on_chain']
-        si = self.social_intelligence() * self.weights['social']
-        ma = self.get_macro_data() * self.weights['macro']
-        
-        final_score = oc + si + ma
-        return "BULLISH" if final_score > 0.6 else "BEARISH"
-
-# Run Core
-if __name__ == "__main__":
-    engine = SolEngineCore()
-    while True:
-        signal = engine.generate_alpha_signal()
-        print(f"Current Global Intelligence Signal: {signal}")
-        time.sleep(60) # Har minute update
+        }
     }
 </script>
 </body>
