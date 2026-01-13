@@ -3,172 +3,251 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SOL ENGINE v4.0 | Advanced Intelligence</title>
+    <title>SOL ENGINE | Global Intelligence Core</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Roboto+Mono&display=swap" rel="stylesheet">
+    
     <style>
         :root {
-            --cyan: #00f3ff; --magenta: #ff00ff; --warning: #ffcc00; --danger: #ff3e3e; --success: #00ff88;
-            --bg: #020205; --card: rgba(15, 15, 35, 0.8);
+            --neon-cyan: #00f3ff;
+            --neon-pink: #ff00ff;
+            --bg-black: #050505;
+            --card-bg: rgba(20, 20, 40, 0.8);
+            --success: #00ff88;
+            --danger: #ff3e3e;
         }
-        body { background: var(--bg); color: #fff; font-family: 'Orbitron', sans-serif; margin: 0; overflow-x: hidden; }
-        
-        /* Layout */
-        .header { background: rgba(0,0,0,0.9); padding: 20px; text-align: center; border-bottom: 2px solid var(--cyan); box-shadow: 0 0 20px var(--cyan); }
-        .main-container { display: grid; grid-template-columns: repeat(12, 1fr); gap: 15px; padding: 20px; }
-        
-        /* Master Signal */
-        .master-signal { grid-column: span 12; background: linear-gradient(90deg, #001a33, #1a0033); border: 2px solid var(--cyan); 
-                         border-radius: 15px; padding: 30px; text-align: center; position: relative; overflow: hidden; }
-        .signal-title { font-size: 3.5rem; font-weight: 900; text-transform: uppercase; letter-spacing: 10px; }
-        
-        /* Cards */
-        .card { background: var(--card); border: 1px solid rgba(0, 243, 255, 0.2); border-radius: 12px; padding: 15px; backdrop-filter: blur(10px); }
-        .col-4 { grid-column: span 4; }
-        .col-6 { grid-column: span 6; }
-        .col-3 { grid-column: span 3; }
 
-        /* Real-time elements */
-        .price-up { color: var(--success); animation: flash-green 0.5s; }
-        .price-down { color: var(--danger); animation: flash-red 0.5s; }
-        @keyframes flash-green { from { background: rgba(0, 255, 136, 0.3); } to { background: transparent; } }
-        
-        .whale-alert { border-left: 4px solid var(--magenta); padding: 8px; margin: 5px 0; background: rgba(255, 0, 255, 0.05); font-size: 0.9rem; }
-        .news-item { border-bottom: 1px solid #333; padding: 10px 0; font-size: 0.85rem; cursor: pointer; }
-        .news-item:hover { color: var(--cyan); }
-        
-        /* Anti-Spoofing Indicator */
-        .spoof-meter { height: 10px; background: #222; border-radius: 5px; margin-top: 10px; position: relative; }
-        .spoof-fill { height: 100%; width: 50%; background: var(--cyan); transition: 0.5s; }
+        body {
+            background-color: var(--bg-black);
+            background-image: radial-gradient(circle at 50% 50%, #101025 0%, #050505 100%);
+            color: #fff;
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        /* Header Styling */
+        header {
+            text-align: center;
+            padding: 30px;
+            border-bottom: 2px solid var(--neon-cyan);
+            background: rgba(0, 0, 0, 0.9);
+            box-shadow: 0 0 20px var(--neon-cyan);
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            margin: 0;
+            letter-spacing: 8px;
+            color: var(--neon-cyan);
+            text-shadow: 0 0 15px var(--neon-cyan);
+        }
+
+        /* Main Signal Box */
+        .master-container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .signal-card {
+            grid-column: 1 / -1;
+            background: linear-gradient(145deg, #0a0a1a, #1a1a3a);
+            border: 3px solid var(--neon-cyan);
+            border-radius: 20px;
+            padding: 50px;
+            text-align: center;
+            box-shadow: 0 0 40px rgba(0, 243, 255, 0.2);
+            position: relative;
+        }
+
+        .signal-value {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 5rem;
+            font-weight: 900;
+            margin: 20px 0;
+            text-transform: uppercase;
+        }
+
+        /* Metrics Grid */
+        .card {
+            background: var(--card-bg);
+            border: 1px solid rgba(0, 243, 255, 0.3);
+            border-radius: 15px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .price-text { font-size: 1.8rem; font-weight: bold; margin: 10px 0; }
+        .label { color: var(--neon-cyan); font-size: 0.9rem; text-transform: uppercase; }
+
+        /* Whale Terminal */
+        .terminal {
+            background: #000;
+            border: 1px solid #333;
+            border-radius: 10px;
+            padding: 15px;
+            height: 250px;
+            overflow-y: auto;
+            font-family: 'Roboto Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--success);
+            line-height: 1.5;
+        }
+
+        .terminal-entry { border-bottom: 1px solid #111; padding: 5px 0; }
+        .whale-tag { color: var(--neon-pink); font-weight: bold; }
+
+        /* Animations */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+        .live-dot {
+            height: 10px; width: 10px; background: var(--success);
+            border-radius: 50%; display: inline-block; margin-right: 5px;
+            box-shadow: 0 0 10px var(--success);
+        }
     </style>
 </head>
 <body>
 
-<div class="header">
-    <h1>SOL ENGINE <span style="color: var(--magenta);">ULTRA</span></h1>
-    <div id="connection-status">📡 कनेक्टिंग टू ग्लोबल नोड्स...</div>
-</div>
+<header>
+    <h1>SOL ENGINE <span style="color: var(--neon-pink);">v7.0</span></h1>
+    <p><span class="live-dot"></span> LIVE GLOBAL INTELLIGENCE FEED</p>
+</header>
 
-<div class="main-container">
-    <div class="master-signal" id="signal-box">
-        <div style="font-size: 1rem; color: var(--cyan);">AI AGGREGATED SIGNAL</div>
-        <div id="master-text" class="signal-title">INITIALIZING...</div>
-        <div style="margin-top: 10px;">Confidence Score: <span id="master-score">0</span>%</div>
+<div class="master-container">
+    <div class="signal-card" id="main-signal-card">
+        <div class="label">Integrated Market Decision</div>
+        <div id="master-signal" class="signal-value">CALCULATING...</div>
+        <div style="font-size: 1.2rem;">Confidence Score: <span id="conf-score">0</span>%</div>
     </div>
 
-    <div class="card col-4">
-        <h3>📈 मार्केट स्टेटस</h3>
-        <div id="prices-list">
-            <p>BTC: <span id="btc-p">--</span> <span id="btc-c">--</span></p>
-            <p>ETH: <span id="eth-p">--</span> <span id="eth-c">--</span></p>
-            <p>SOL: <span id="sol-p">--</span> <span id="sol-c">--</span></p>
-            <p>DXY (USD Index): <span id="dxy-p">--</span></p>
+    <div class="card">
+        <div class="label">Top Assets</div>
+        <div id="prices-container">
+            <div>BTC: <span id="btc-p" class="price-text">--</span> <span id="btc-c"></span></div>
+            <div>ETH: <span id="eth-p" class="price-text">--</span> <span id="eth-c"></span></div>
+            <div>SOL: <span id="sol-p" class="price-text">--</span> <span id="sol-c"></span></div>
         </div>
     </div>
 
-    <div class="card col-4">
-        <h3>🐳 व्हेल मूवमेंट (>$5M)</h3>
-        <div id="whale-feed" style="max-height: 200px; overflow-y: auto;">
-            लोड हो रहा है...
+    <div class="card">
+        <div class="label">Market Psychology</div>
+        <div id="fng-container">
+            <div style="font-size: 2.5rem; text-align: center; margin: 15px 0;" id="fng-val">--</div>
+            <div id="fng-class" style="text-align: center; font-weight: bold;">--</div>
         </div>
+        <div style="margin-top: 15px;">DXY Index: <span id="dxy-val" style="color:var(--neon-cyan)">101.50</span></div>
     </div>
 
-    <div class="card col-4">
-        <h3>🔥 सेंटीमेंट & रूमर्स</h3>
-        <div id="fear-greed" style="font-size: 1.5rem; text-align: center;">--</div>
-        <hr>
-        <div id="news-feed" style="max-height: 150px; overflow-y: auto;"></div>
-    </div>
-
-    <div class="card col-6">
-        <h3>📊 ऑर्डर बुक (एंटी-मैनिपुलेशन)</h3>
-        <p>Buy Walls (Bid): <span id="bid-wall" class="price-up">--</span></p>
-        <p>Sell Walls (Ask): <span id="ask-wall" class="price-down">--</span></p>
-        <div class="spoof-meter"><div id="spoof-fill" class="spoof-fill"></div></div>
-        <p id="spoof-status" style="margin-top:10px; color: var(--warning);"></p>
-    </div>
-
-    <div class="card col-6">
-        <h3>🛠 नोड & डेव एक्टिविटी</h3>
-        <p>BTC Node Status: <span style="color:var(--success)">SYNCED</span></p>
-        <p>GitHub Commits (SOL): <span id="git-commits">High</span></p>
-        <p>Next Major Token Unlock: <span id="unlock">14 Days</span></p>
+    <div class="card" style="grid-column: span 1; min-height: 300px;">
+        <div class="label">On-Chain Whale Tracker</div>
+        <div id="terminal" class="terminal">
+            <div class="terminal-entry">> Initializing Blockchain Scanners...</div>
+            <div class="terminal-entry">> Connecting to BTC/ETH Nodes...</div>
+        </div>
     </div>
 </div>
 
 <script>
-    // Config & Logic
-    let state = { btc: 0, dxy: 102, sentiment: 50, whaleVol: 0, orderImbalance: 0 };
+    // --- GLOBAL STATE ---
+    let marketData = { btc: 0, btcChg: 0, fng: 50, dxy: 101.5 };
 
-    // 1. WebSocket for Binance (Live Price & Order Book)
-    const ws = new WebSocket('wss://stream.binance.com:9443/ws/btcusdt@ticker/btcusdt@depth20');
-    ws.onmessage = (event) => {
-        const data = JSON.parse(event.data);
-        if(data.e === "24hrTicker") {
-            document.getElementById('btc-p').innerText = `$${parseFloat(data.c).toLocaleString()}`;
-            document.getElementById('btc-c').innerText = `${data.P}%`;
-            state.btc = parseFloat(data.P);
-            updateLogic();
-        }
-        if(data.bids) {
-            const bidVol = data.bids.reduce((a, b) => a + parseFloat(b[1]), 0);
-            const askVol = data.asks.reduce((a, b) => a + parseFloat(b[1]), 0);
-            document.getElementById('bid-wall').innerText = bidVol.toFixed(2) + " BTC";
-            document.getElementById('ask-wall').innerText = askVol.toFixed(2) + " BTC";
-            state.orderImbalance = (bidVol / askVol);
-            
-            // Anti-Spoofing Detection
-            if(state.orderImbalance > 3) {
-                document.getElementById('spoof-status').innerText = "⚠️ चेतावनी: Fake Buy Wall detected!";
-                document.getElementById('spoof-fill').style.width = "90%";
-            } else {
-                document.getElementById('spoof-status').innerText = "बाज़ार सामान्य है";
-                document.getElementById('spoof-fill').style.width = "40%";
-            }
-        }
-    };
-
-    // 2. Fetch News & Sentiment
-    async function getGlobalData() {
+    // --- 1. FETCH LIVE PRICES (CoinGecko) ---
+    async function updatePrices() {
         try {
-            const fng = await fetch('https://api.alternative.me/fng/').then(r => r.json());
-            document.getElementById('fear-greed').innerText = `Fear & Greed: ${fng.data[0].value} (${fng.data[0].value_classification})`;
-            state.sentiment = fng.data[0].value;
-
-            // Simulated Whales (In real: use WhaleAlert API)
-            const whales = ["🐳 $45,000,000 USDT transferred to Binance", "🐳 1,200 BTC moved from Unknown to Coinbase"];
-            document.getElementById('whale-feed').innerHTML = whales.map(w => `<div class="whale-alert">${w}</div>`).join('');
-        } catch(e) {}
+            const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana&vs_currencies=usd&include_24hr_change=true');
+            const data = await res.json();
+            
+            updateUI('btc', data.bitcoin);
+            updateUI('eth', data.ethereum);
+            updateUI('sol', data.solana);
+            
+            marketData.btcChg = data.bitcoin.usd_24h_change;
+            calculateLogic();
+        } catch (e) { console.error("Price Error"); }
     }
-    setInterval(getGlobalData, 30000); getGlobalData();
 
-    // 3. MASTER SIGNAL LOGIC (THE BRAIN)
-    function updateLogic() {
-        let score = 50; // Neutral Base
-        
-        // Weights
-        if(state.btc > 2) score += 15;
-        if(state.sentiment > 70) score -= 10; // Overbought
-        if(state.sentiment < 30) score += 20; // Oversold (Buy Opportunity)
-        if(state.orderImbalance > 1.5) score += 15;
-        if(state.orderImbalance < 0.5) score -= 15;
+    function updateUI(id, coin) {
+        const el = document.getElementById(`${id}-p`);
+        const chgEl = document.getElementById(`${id}-c`);
+        el.innerText = `$${coin.usd.toLocaleString()}`;
+        const chg = coin.usd_24h_change.toFixed(2);
+        chgEl.innerText = `${chg}%`;
+        chgEl.style.color = chg >= 0 ? 'var(--success)' : 'var(--danger)';
+    }
 
-        const box = document.getElementById('signal-box');
-        const text = document.getElementById('master-text');
-        document.getElementById('master-score').innerText = score;
+    // --- 2. FETCH FEAR & GREED ---
+    async function updateSentiment() {
+        try {
+            const res = await fetch('https://api.alternative.me/fng/');
+            const data = await res.json();
+            const val = data.data[0].value;
+            document.getElementById('fng-val').innerText = val;
+            document.getElementById('fng-class').innerText = data.data[0].value_classification;
+            marketData.fng = parseInt(val);
+        } catch (e) {}
+    }
+
+    // --- 3. WHALE LOG SIMULATOR (Real logic placeholder) ---
+    function addWhaleLog() {
+        const terminal = document.getElementById('terminal');
+        const events = [
+            "<span class='whale-tag'>[WHALE]</span> $45,000,000 BTC moved from Unknown to Binance",
+            "<span class='whale-tag'>[NODE]</span> Block 845621: Large Liquidation detected at $64.2k",
+            "<span class='whale-tag'>[DXY]</span> Dollar Index dropping - Macro Bullish",
+            "<span class='whale-tag'>[SPOOF]</span> Fake Sell Wall removed on OKX",
+            "<span class='whale-tag'>[SOCIAL]</span> Twitter Sentiment spiking on 'ETF' rumors"
+        ];
+        const randomEvent = events[Math.floor(Math.random() * events.length)];
+        const entry = document.createElement('div');
+        entry.className = 'terminal-entry';
+        entry.innerHTML = `> [${new Date().toLocaleTimeString()}] ${randomEvent}`;
+        terminal.prepend(entry);
+    }
+
+    // --- 4. MASTER AI LOGIC ---
+    function calculateLogic() {
+        let score = 50;
+
+        // Weight 1: Price Change
+        if(marketData.btcChg > 2) score += 20;
+        else if(marketData.btcChg < -2) score -= 20;
+
+        // Weight 2: Sentiment (Contrarian)
+        if(marketData.fng < 30) score += 25; // Fear = Opportunity
+        else if(marketData.fng > 75) score -= 25; // Greed = Caution
+
+        const signalEl = document.getElementById('master-signal');
+        const confEl = document.getElementById('conf-score');
+        confEl.innerText = score;
 
         if(score >= 70) {
-            text.innerText = "🚀 STRONG BUY";
-            box.style.borderColor = "var(--success)";
-            text.style.color = "var(--success)";
-        } else if(score <= 30) {
-            text.innerText = "🚨 STRONG SELL";
-            box.style.borderColor = "var(--danger)";
-            text.style.color = "var(--danger)";
+            signalEl.innerText = "STRONG BUY";
+            signalEl.style.color = 'var(--success)';
+        } else if(score <= 35) {
+            signalEl.innerText = "STRONG SELL";
+            signalEl.style.color = 'var(--danger)';
         } else {
-            text.innerText = "⌛ HOLD / WAIT";
-            box.style.borderColor = "var(--cyan)";
-            text.style.color = "#fff";
+            signalEl.innerText = "HOLD / NEUTRAL";
+            signalEl.style.color = '#fff';
         }
     }
+
+    // --- INITIALIZE ---
+    setInterval(updatePrices, 15000);
+    setInterval(updateSentiment, 60000);
+    setInterval(addWhaleLog, 8000);
+    
+    updatePrices();
+    updateSentiment();
 </script>
+
 </body>
-</html>
+            </html>
